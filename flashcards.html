@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>英語職業單字 Flashcards</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .card {
+      width: 320px;
+      height: 320px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .card img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img id="flashcard" src="" alt="職業圖片" />
+  </div>
+  <div class="buttons">
+    <button onclick="prevCard()">上一張</button>
+    <button onclick="randomCard()">隨機</button>
+    <button onclick="nextCard()">下一張</button>
+  </div>
+
+  <script>
+    const images = [
+      "https://cdn.pixabay.com/photo/2017/08/06/00/01/agriculture-2588754_1280.jpg",
+      "https://cdn.pixabay.com/photo/2017/01/20/00/30/woman-1995624_1280.jpg",
+      "https://cdn.pixabay.com/photo/2016/03/27/21/16/police-1282337_1280.jpg",
+      "https://cdn.pixabay.com/photo/2017/08/01/08/29/painter-2560089_1280.jpg",
+      "https://cdn.pixabay.com/photo/2015/11/03/08/58/bus-1019749_1280.jpg",
+      "https://cdn.pixabay.com/photo/2016/03/31/19/57/tooth-1297454_1280.png",
+      "https://cdn.pixabay.com/photo/2016/10/18/21/22/doctor-1751058_1280.jpg",
+      "https://cdn.pixabay.com/photo/2015/03/26/09/41/typewriter-690369_1280.jpg",
+    ];
+
+    let index = 0;
+    const imgEl = document.getElementById("flashcard");
+
+    function showCard(i) {
+      imgEl.src = images[i];
+    }
+
+    function nextCard() {
+      index = (index + 1) % images.length;
+      showCard(index);
+    }
+
+    function prevCard() {
+      index = (index - 1 + images.length) % images.length;
+      showCard(index);
+    }
+
+    function randomCard() {
+      let rand;
+      do {
+        rand = Math.floor(Math.random() * images.length);
+      } while (rand === index);
+      index = rand;
+      showCard(index);
+    }
+
+    // 初始化
+    showCard(index);
+  </script>
+</body>
+</html>
